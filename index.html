@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Master Craftsman | Artisan Carpentry</title>
-  <link rel="icon" type="image/png" href="/images/Screenshot 2026-09-27 122807.png" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
@@ -31,16 +31,16 @@
         <span class="logo-text">WoodCraft <span>Pro</span></span>
       </div>
       <ul class="nav-links">
-        <li><a href="#home"      class="nav-link active" data-en="Home"      data-gu="હોમ">Home</a></li>
-        <li><a href="#about"     class="nav-link"        data-en="About"     data-gu="વિશે">About</a></li>
-        <li><a href="#skills"    class="nav-link"        data-en="Skills"    data-gu="કૌશલ્ય">Skills</a></li>
-        <li><a href="#portfolio" class="nav-link"        data-en="Portfolio" data-gu="પોર્ટફોલિઓ">Portfolio</a></li>
-        <li><a href="#process"   class="nav-link"        data-en="Process"   data-gu="પ્રક્રિયા">Process</a></li>
-        <li><a href="#contact"   class="nav-link"        data-en="Contact"   data-gu="સંપર્ક">Contact</a></li>
-        <li><a href="/gallery"   class="nav-link"        data-en="Gallery"   data-gu="ગેલેરી">Gallery</a></li>
+        <li><a href="#home"         class="nav-link active" data-en="Home"         data-gu="હોમ">Home</a></li>
+        <li><a href="#about"        class="nav-link"        data-en="About"        data-gu="વિશે">About</a></li>
+        <li><a href="#skills"       class="nav-link"        data-en="Skills"       data-gu="કૌશલ્ય">Skills</a></li>
+        <li><a href="#portfolio"    class="nav-link"        data-en="Portfolio"    data-gu="પોર્ટફોલિઓ">Portfolio</a></li>
+        <li><a href="#process"      class="nav-link"        data-en="Process"      data-gu="પ્રક્રિયા">Process</a></li>
+        <li><a href="#testimonials" class="nav-link"        data-en="Reviews"      data-gu="સમીક્ષા">Reviews</a></li>
+        <li><a href="#contact"      class="nav-link"        data-en="Contact"      data-gu="સંપર્ક">Contact</a></li>
+        <li><a href="/gallery"      class="nav-link"        data-en="Gallery"      data-gu="ગેલેરી">Gallery</a></li>
       </ul>
       <div class="nav-controls">
-        <!-- Language Toggle -->
         <button class="lang-toggle" id="langToggle" title="Toggle Language">
           <span class="lang-en">EN</span>
           <span class="lang-divider">|</span>
@@ -57,13 +57,14 @@
   <!-- Mobile Menu -->
   <div class="mobile-menu" id="mobileMenu">
     <ul>
-      <li><a href="#home"      class="mob-link" data-en="Home"      data-gu="હોમ">Home</a></li>
-      <li><a href="#about"     class="mob-link" data-en="About"     data-gu="વિશે">About</a></li>
-      <li><a href="#skills"    class="mob-link" data-en="Skills"    data-gu="કૌશલ્ય">Skills</a></li>
-      <li><a href="#portfolio" class="mob-link" data-en="Portfolio" data-gu="પોર્ટફોલિઓ">Portfolio</a></li>
-      <li><a href="#process"   class="mob-link" data-en="Process"   data-gu="પ્રક્રિયા">Process</a></li>
-      <li><a href="#contact"   class="mob-link" data-en="Contact"   data-gu="સંપર્ક">Contact</a></li>
-      <li><a href="/gallery"   class="mob-link" data-en="Gallery"   data-gu="ગેલેરી">Gallery</a></li>
+      <li><a href="#home"         class="mob-link" data-en="Home"      data-gu="હોમ">Home</a></li>
+      <li><a href="#about"        class="mob-link" data-en="About"     data-gu="વિશે">About</a></li>
+      <li><a href="#skills"       class="mob-link" data-en="Skills"    data-gu="કૌશલ્ય">Skills</a></li>
+      <li><a href="#portfolio"    class="mob-link" data-en="Portfolio" data-gu="પોર્ટફોલિઓ">Portfolio</a></li>
+      <li><a href="#process"      class="mob-link" data-en="Process"   data-gu="પ્રક્રિયા">Process</a></li>
+      <li><a href="#testimonials" class="mob-link" data-en="Reviews"   data-gu="સમીક્ષા">Reviews</a></li>
+      <li><a href="#contact"      class="mob-link" data-en="Contact"   data-gu="સંપર્ક">Contact</a></li>
+      <li><a href="/gallery"      class="mob-link" data-en="Gallery"   data-gu="ગેલેરી">Gallery</a></li>
     </ul>
   </div>
 
@@ -115,6 +116,12 @@
           <p data-en="Happy Clients" data-gu="ખુશ ગ્રાહકો">Happy Clients</p>
         </div>
       </div>
+      <!-- Visitor Counter -->
+      <div class="visitor-counter" id="visitorCounter">
+        <i class="fas fa-eye"></i>
+        <span id="visitorCount">0</span>
+        <span data-en="visitors" data-gu="મુલાકાતીઓ">visitors</span>
+      </div>
     </div>
     <div class="hero-scroll">
       <div class="scroll-indicator">
@@ -136,7 +143,7 @@
       <div class="about-image-wrap">
         <div class="about-img-bg"></div>
         <div class="about-img-placeholder">
-          <img src="images/WhatsApp Image 2026-09-13 at 11.42.34 PM.jpeg" alt="Master Craftsman" class="about-real-img" />
+          <img src="/images/WhatsApp Image 2026-09-13 at 11.42.34 PM.jpeg" alt="Master Craftsman" class="about-real-img" />
         </div>
         <div class="experience-badge">
           <span class="exp-num" id="bioExp">20</span>
@@ -144,8 +151,8 @@
         </div>
         <div class="about-tools">
           <div class="mini-tool"><i class="fas fa-hammer"></i></div>
-          <div class="mini-tool"><i class="fas fa-saw"></i></div>
           <div class="mini-tool"><i class="fas fa-ruler"></i></div>
+          <div class="mini-tool"><i class="fas fa-wrench"></i></div>
         </div>
       </div>
       <div class="about-content">
@@ -164,7 +171,7 @@
           <i class="fas fa-user-tie"></i>
           <div>
             <span class="craftsman-label" data-en="Master Craftsman" data-gu="મુખ્ય કારીગર">Master Craftsman</span>
-            <h3 class="craftsman-name" id="bioName">Master Craftsman</h3>
+            <h3 class="craftsman-name" id="bioName">Suthar Naresh</h3>
             <span class="craftsman-title" id="bioTitle">Artisan Carpenter</span>
           </div>
         </div>
@@ -301,6 +308,62 @@
     </div>
   </section>
 
+  <!-- Testimonials Section -->
+  <section id="testimonials" class="testimonials">
+    <div class="section-container">
+      <div class="section-header">
+        <div class="section-tag"><i class="fas fa-star"></i> <span data-en="Testimonials" data-gu="પ્રતિભાવ">Testimonials</span></div>
+        <h2 class="section-title"><span data-en="What Clients " data-gu="ગ્રાહકો ">What Clients </span><span data-en="Say" data-gu="શું કહે છે">Say</span></h2>
+        <p data-en="Real words from real people who trusted us with their dream projects." data-gu="એ લોકોના સાચા શબ્દો જેમણે અમારા પર વિશ્વાસ મૂક્યો.">Real words from real people who trusted us with their dream projects.</p>
+      </div>
+      <div class="testimonials-slider">
+        <div class="testimonial-track" id="testimonialTrack">
+          <div class="testimonial-card">
+            <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+            <p data-en="The wardrobe Nareshbhai built for us is absolutely stunning. The finish, the joints, the attention to detail — pure artistry. Our home feels transformed." data-gu="નરેશભાઈએ અમારા માટે બનાવેલ વોર્ડરોબ અત્યંત સુંદર છે. ફિનિશ, સાંધા, વિગતો પ્રત્યે ધ્યાન — શુદ્ધ કળા.">"The wardrobe Nareshbhai built for us is absolutely stunning. The finish, the joints, the attention to detail — pure artistry. Our home feels transformed."</p>
+            <div class="reviewer">
+              <div class="reviewer-avatar">R</div>
+              <div class="reviewer-info">
+                <strong>Ramesh Patel</strong>
+                <span data-en="Surat, Gujarat" data-gu="સુરત, ગુજરાત">Surat, Gujarat</span>
+                <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+            <p data-en="We had our entire kitchen cabinets redone. The quality is exceptional — solid wood, perfect alignment, and delivered on time. Highly recommend!" data-gu="અમારી આખી રસોડાની કેબિનેટ ફરીથી બનાવડાવી. ગુણવત્તા અત્યયત સારી — નક્કર લાકડું, ચોક્કસ સ્થાપન, સમયસર ડિલિવરી.">"We had our entire kitchen cabinets redone. The quality is exceptional — solid wood, perfect alignment, and delivered on time. Highly recommend!"</p>
+            <div class="reviewer">
+              <div class="reviewer-avatar">M</div>
+              <div class="reviewer-info">
+                <strong>Meena Shah</strong>
+                <span data-en="Ahmedabad, Gujarat" data-gu="અમદાવાદ, ગુજરાત">Ahmedabad, Gujarat</span>
+                <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+            <p data-en="The carved door panel for our pooja room is beyond what I imagined. Every detail is perfect. People who visit our home always ask about it first." data-gu="અમારા પૂજા ઓરડા માટેની કોતરણીવાળી દરવાજાની પેનલ મારી કલ્પના કરતા વધુ સુંદર છે.">"The carved door panel for our pooja room is beyond what I imagined. Every detail is perfect. People who visit our home always ask about it first."</p>
+            <div class="reviewer">
+              <div class="reviewer-avatar">J</div>
+              <div class="reviewer-info">
+                <strong>Jayesh Desai</strong>
+                <span data-en="Vadodara, Gujarat" data-gu="વડોદરા, ગુજરાત">Vadodara, Gujarat</span>
+                <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slider-controls">
+          <button class="slider-btn" id="prevBtn"><i class="fas fa-chevron-left"></i></button>
+          <div class="slider-dots" id="sliderDots"></div>
+          <button class="slider-btn" id="nextBtn"><i class="fas fa-chevron-right"></i></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Contact Section -->
   <section id="contact" class="contact">
     <div class="section-container">
@@ -312,7 +375,8 @@
         </h2>
         <p data-en="Have a project in mind? Let's talk about bringing your vision to life." data-gu="કોઈ પ્રોજેક્ટ છે? ચાલો તમારું સ્વપ્ન સાકાર કરીએ.">Have a project in mind? Let's talk about bringing your vision to life.</p>
       </div>
-      <div class="contact-wrap single">
+      <div class="contact-wrap">
+        <!-- Contact Info -->
         <div class="contact-info">
           <div class="info-card">
             <div class="info-icon"><i class="fas fa-phone-alt"></i></div>
@@ -321,11 +385,55 @@
               <p>+91 9726034545</p>
             </div>
           </div>
-          <!-- WhatsApp floating CTA -->
+          <div class="info-card">
+            <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+            <div>
+              <h4 data-en="Location" data-gu="સ્થળ">Location</h4>
+              <p data-en="Gujarat, India" data-gu="ગુજરાત, ભારત">Gujarat, India</p>
+            </div>
+          </div>
           <a href="https://wa.me/919726034545" target="_blank" class="whatsapp-btn">
             <i class="fab fa-whatsapp"></i>
             <span data-en="Chat on WhatsApp" data-gu="WhatsApp પર વાત કરો">Chat on WhatsApp</span>
           </a>
+        </div>
+        <!-- Contact Form -->
+        <div class="contact-form-wrap">
+          <form class="contact-form" id="contactForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label data-en="Your Name" data-gu="તમારું નામ">Your Name</label>
+                <input type="text" placeholder="Ramesh Patel" required />
+              </div>
+              <div class="form-group">
+                <label data-en="Phone Number" data-gu="ફોન નંબર">Phone Number</label>
+                <input type="tel" placeholder="+91 9XXXXXXXXX" />
+              </div>
+            </div>
+            <div class="form-group full">
+              <label data-en="Type of Work" data-gu="કામનો પ્રકાર">Type of Work</label>
+              <select>
+                <option data-en="Custom Furniture" data-gu="કસ્ટમ ફર્નિચર">Custom Furniture</option>
+                <option data-en="Door & Window Frames" data-gu="દરવાજા અને બારીઓ">Door & Window Frames</option>
+                <option data-en="Cabinetry & Storage" data-gu="કેબિનેટ અને સ્ટોરેજ">Cabinetry & Storage</option>
+                <option data-en="Wood Carving & Art" data-gu="લાકડાની કોતરણી">Wood Carving & Art</option>
+                <option data-en="Restoration & Repair" data-gu="પુનઃસ્થાપન">Restoration & Repair</option>
+                <option data-en="Other" data-gu="અન્ય">Other</option>
+              </select>
+            </div>
+            <div class="form-group full">
+              <label data-en="Your Message" data-gu="તમારો સંદેશ">Your Message</label>
+              <textarea rows="4" placeholder="Tell me about your project..." data-en-placeholder="Tell me about your project..." data-gu-placeholder="તમારા પ્રોજેક્ટ વિશે જણાવો..."></textarea>
+            </div>
+            <button type="submit" class="submit-btn">
+              <span data-en="Send Message" data-gu="સંદેશ મોકલો">Send Message</span>
+              <i class="fas fa-paper-plane"></i>
+            </button>
+            <div class="form-success" id="formSuccess">
+              <i class="fas fa-check-circle"></i>
+              <span data-en="Message sent! I'll get back to you soon." data-gu="સંદેશ મળ્યો! હું ટૂંક સમયમાં જવાબ આપીશ.">Message sent! I'll get back to you soon.</span>
+            </div>
+          </form>
         </div>
       </div>
     </div>
@@ -350,12 +458,9 @@
     </div>
   </footer>
 
-  <!-- WhatsApp Float Button -->
   <a href="https://wa.me/919726034545" target="_blank" class="whatsapp-float">
     <i class="fab fa-whatsapp"></i>
   </a>
-
-  <!-- Back to Top -->
   <button class="back-to-top" id="backToTop">
     <i class="fas fa-chevron-up"></i>
   </button>

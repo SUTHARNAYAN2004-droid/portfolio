@@ -181,7 +181,85 @@ if (portfolioGrid) {
   loadPortfolio();
 }
 
-// ===================== PORTFOLIO FILTER (static items) =====================
+// ===================== BIO / ABOUT (fetch from API) =====================
+(async function loadBio() {
+  try {
+    const res  = await fetch('/api/bio');
+    const bio  = await res.json();
+    const name  = document.getElementById('bioName');
+    const title = document.getElementById('bioTitle');
+    const desc  = document.getElementById('bioDesc');
+    const exp   = document.getElementById('bioExp');
+    if (name  && bio.name)        name.textContent  = bio.name;
+    if (title && bio.title)       title.textContent = bio.title;
+    if (desc  && bio.description) desc.textContent  = bio.description;
+    if (exp   && bio.experience)  exp.textContent   = bio.experience;
+  } catch (e) { /* silently keep HTML defaults */ }
+})();
+
+// ===================== VISITOR COUNTER =====================
+(async function initVisitor() {
+  const countEl = document.getElementById('visitorCount');
+  if (!countEl) return;
+  try {
+    // increment on each visit
+    const res  = await fetch('/api/visitor', { method: 'POST' });
+    const data = await res.json();
+    countEl.textContent = data.visitors;
+  } catch (e) { countEl.textContent = '—'; }
+})();
+
+// ===================== TESTIMONIALS SLIDER =====================
+(function initTestimonials() {
+  const track        = document.getElementById('testimonialTrack');
+  const dotsContainer = document.getElementById('sliderDots');
+  const prevBtn      = document.getElementById('prevBtn');
+  const nextBtn      = document.getElementById('nextBtn');
+  if (!track) return;
+
+  const cards = track.querySelectorAll('.testimonial-card');
+  let current = 0;
+
+  // Build dots
+  cards.forEach((_, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'dot' + (i === 0 ? ' active' : '');
+    dot.addEventListener('click', () => goTo(i));
+    dotsContainer.appendChild(dot);
+  });
+
+  function goTo(index) {
+    current = (index + cards.length) % cards.length;
+    track.style.transform = `translateX(-${current * 100}%)`;
+    dotsContainer.querySelectorAll('.dot').forEach((d, i) =>
+      d.classList.toggle('active', i === current)
+    );
+  }
+
+  if (prevBtn) prevBtn.addEventListener('click', () => goTo(current - 1));
+  if (nextBtn) nextBtn.addEventListener('click', () => goTo(current + 1));
+
+  // Auto-slide every 5s
+  setInterval(() => goTo(current + 1), 5000);
+})();
+
+// ===================== CONTACT FORM =====================
+const contactForm = document.getElementById('contactForm');
+if (contactForm) {
+  contactForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const btn     = contactForm.querySelector('.submit-btn');
+    const success = document.getElementById('formSuccess');
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+    btn.disabled  = true;
+    setTimeout(() => {
+      btn.innerHTML = '<span data-en="Send Message" data-gu="સંદેશ મોકલો">Send Message</span><i class="fas fa-paper-plane"></i>';
+      btn.disabled  = false;
+      if (success) { success.style.display = 'flex'; setTimeout(() => success.style.display = 'none', 4000); }
+      contactForm.reset();
+    }, 1500);
+  });
+}
 const filterBtns = document.querySelectorAll('.filter-btn');
 filterBtns.forEach(btn => {
   btn.addEventListener('click', () => {
