@@ -1,19 +1,23 @@
 {
   "version": 2,
   "builds": [
-    { "src": "style.css",   "use": "@vercel/static" },
-    { "src": "script.js",   "use": "@vercel/static" },
-    { "src": "favicon.svg", "use": "@vercel/static" },
-    { "src": "logo.png",    "use": "@vercel/static" },
-    { "src": "images/**",   "use": "@vercel/static" },
-    { "src": "server.js",   "use": "@vercel/node" }
+    { "src": "style.css",                        "use": "@vercel/static" },
+    { "src": "script.js",                        "use": "@vercel/static" },
+    { "src": "favicon.svg",                      "use": "@vercel/static" },
+    { "src": "logo.png",                         "use": "@vercel/static" },
+    { "src": "logo.svg",                         "use": "@vercel/static" },
+    { "src": "Screenshot 2026-09-27 160529.png", "use": "@vercel/static" },
+    { "src": "images/**",                        "use": "@vercel/static" },
+    { "src": "server.js",                        "use": "@vercel/node" }
   ],
   "routes": [
-    { "src": "/style.css",   "dest": "/style.css" },
-    { "src": "/script.js",   "dest": "/script.js" },
-    { "src": "/favicon.svg", "dest": "/favicon.svg" },
-    { "src": "/logo.png",    "dest": "/logo.png" },
-    { "src": "/images/(.*)", "dest": "/images/$1" },
-    { "src": "/(.*)",        "dest": "/server.js" }
+    { "src": "/style.css",                          "dest": "/style.css" },
+    { "src": "/script.js",                          "dest": "/script.js" },
+    { "src": "/favicon.svg",                        "dest": "/favicon.svg" },
+    { "src": "/logo.png",                           "dest": "/logo.png" },
+    { "src": "/logo.svg",                           "dest": "/logo.svg" },
+    { "src": "/Screenshot%202026-09-27%20160529.png","dest": "/Screenshot 2026-09-27 160529.png" },
+    { "src": "/images/(.*)",                        "dest": "/images/$1" },
+    { "src": "/(.*)",                               "dest": "/server.js" }
   ]
 }
