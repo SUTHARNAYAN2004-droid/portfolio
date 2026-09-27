@@ -108,13 +108,20 @@ app.post('/api/bio', (req, res) => {
 });
 
 // ── gallery ───────────────────────────────────────────────────
+// Files to exclude from gallery (logos, system files etc.)
+const GALLERY_EXCLUDE = ['desktop.ini', 'Screenshot 2026-09-27 121930.png'];
+
 app.get('/api/gallery', (req, res) => {
   const gallery = readGallery();
   const imagesDir = path.join(__dirname, 'images');
   let staticImgs = [];
   try {
     staticImgs = fs.readdirSync(imagesDir)
-      .filter(f => /\.(jpg|jpeg|png|gif|webp)$/i.test(f) && !gallery.photos.find(p => p.filename === f))
+      .filter(f =>
+        /\.(jpg|jpeg|png|gif|webp)$/i.test(f) &&
+        !GALLERY_EXCLUDE.includes(f) &&
+        !gallery.photos.find(p => p.filename === f)
+      )
       .map(f => ({
         filename: f,
         title   : 'Woodwork',
