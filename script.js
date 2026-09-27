@@ -392,11 +392,39 @@ if (hireBtn) {
 
 // ===================== REVIEW FORM =====================
 (function initReviewForm() {
-  const form    = document.getElementById('reviewForm');
-  const stars   = document.querySelectorAll('#starRating i');
-  const success = document.getElementById('reviewSuccess');
-  let selectedRating = 0;
+  const form      = document.getElementById('reviewForm');
+  const stars     = document.querySelectorAll('#starRating i');
+  const success   = document.getElementById('reviewSuccess');
+  const listEl    = document.getElementById('reviewsList');
+  let selectedRating = 5;
 
+  // Load existing reviews
+  async function loadReviews() {
+    if (!listEl) return;
+    try {
+      const res  = await fetch('/api/reviews');
+      const data = await res.json();
+      if (!data.reviews || !data.reviews.length) {
+        listEl.innerHTML = '<p class="no-reviews" style="text-align:center;color:var(--text-light);padding:1rem 0 2rem">No reviews yet. Be the first!</p>';
+        return;
+      }
+      listEl.innerHTML = data.reviews.map(r => `
+        <div class="review-card">
+          <div class="review-card-header">
+            <div class="review-avatar">${r.name.charAt(0).toUpperCase()}</div>
+            <div>
+              <strong class="review-name">${r.name}</strong>
+              <div class="review-stars">${'<i class="fas fa-star"></i>'.repeat(r.rating)}</div>
+            </div>
+            <span class="review-date">${r.date}</span>
+          </div>
+          <p class="review-text">${r.text}</p>
+        </div>`).join('');
+    } catch (e) { /* silently fail */ }
+  }
+  loadReviews();
+
+  // Star hover + click
   stars.forEach(star => {
     star.addEventListener('mouseover', () => {
       stars.forEach(s => s.classList.toggle('active', s.dataset.val <= star.dataset.val));
@@ -405,24 +433,39 @@ if (hireBtn) {
       stars.forEach(s => s.classList.toggle('active', s.dataset.val <= selectedRating));
     });
     star.addEventListener('click', () => {
-      selectedRating = star.dataset.val;
+      selectedRating = parseInt(star.dataset.val);
       stars.forEach(s => s.classList.toggle('active', s.dataset.val <= selectedRating));
     });
   });
+  // default 5 stars selected
+  stars.forEach(s => s.classList.add('active'));
 
   if (!form) return;
-  form.addEventListener('submit', e => {
+  form.addEventListener('submit', async e => {
     e.preventDefault();
-    const btn = form.querySelector('.review-submit-btn');
+    const btn  = form.querySelector('.review-submit-btn');
+    const name = document.getElementById('reviewName').value.trim();
+    const text = document.getElementById('reviewText').value.trim();
+    if (!name || !text) return;
+
     btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
-    btn.disabled = true;
-    setTimeout(() => {
-      btn.innerHTML = '<span>Submit Review</span><i class="fas fa-paper-plane"></i>';
-      btn.disabled = false;
+    btn.disabled  = true;
+
+    try {
+      await fetch('/api/reviews', {
+        method : 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body   : JSON.stringify({ name, rating: selectedRating, text })
+      });
+      form.reset();
+      selectedRating = 5;
+      stars.forEach(s => s.classList.add('active'));
       if (success) { success.style.display = 'flex'; setTimeout(() => success.style.display = 'none', 4000); }
-      form.reset(); selectedRating = 0;
-      stars.forEach(s => s.classList.remove('active'));
-    }, 1200);
+      loadReviews(); // refresh the list immediately
+    } catch (err) { /* silently fail */ }
+
+    btn.innerHTML = '<span>Submit Review</span><i class="fas fa-paper-plane"></i>';
+    btn.disabled  = false;
   });
 })();
 

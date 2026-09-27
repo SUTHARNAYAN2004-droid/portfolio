@@ -40,6 +40,7 @@ let memData = {
   }
 };
 let memGallery = { photos: [] };
+let memReviews = { reviews: [] };
 
 // ── data helpers ──────────────────────────────────────────────
 function readData() {
@@ -60,6 +61,18 @@ function readGallery() {
 function saveGallery(g) {
   if (!isWritable) { memGallery = g; return; }
   fs.writeFileSync(GALLERY_FILE, JSON.stringify(g, null, 2));
+}
+
+// Reviews file
+const REVIEWS_FILE = path.join(DATA_DIR, 'reviews.json');
+function readReviews() {
+  if (!isWritable) return memReviews;
+  try { return JSON.parse(fs.readFileSync(REVIEWS_FILE, 'utf8')); }
+  catch { fs.writeFileSync(REVIEWS_FILE, JSON.stringify(memReviews, null, 2)); return memReviews; }
+}
+function saveReviews(r) {
+  if (!isWritable) { memReviews = r; return; }
+  fs.writeFileSync(REVIEWS_FILE, JSON.stringify(r, null, 2));
 }
 
 // ── multer (image uploads) ────────────────────────────────────
@@ -162,6 +175,27 @@ app.patch('/api/gallery/:filename', (req, res) => {
   const photo   = gallery.photos.find(p => p.filename === req.params.filename);
   if (photo) { Object.assign(photo, req.body); saveGallery(gallery); }
   res.json({ success: true });
+});
+
+// ── reviews ───────────────────────────────────────────────────
+app.get('/api/reviews', (req, res) => {
+  res.json(readReviews());
+});
+
+app.post('/api/reviews', (req, res) => {
+  const { name, rating, text } = req.body;
+  if (!name || !text) return res.status(400).json({ success: false, message: 'Name and review required.' });
+  const reviews = readReviews();
+  const review = {
+    id     : Date.now(),
+    name   : name.trim(),
+    rating : parseInt(rating) || 5,
+    text   : text.trim(),
+    date   : new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })
+  };
+  reviews.reviews.unshift(review); // newest first
+  saveReviews(reviews);
+  res.json({ success: true, review });
 });
 
 // ── serve pages ───────────────────────────────────────────────
