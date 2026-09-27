@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Panel | WoodCraft Pro</title>
+  <link rel="icon" type="image/png" href="/images/Screenshot 2026-09-27 122807.png" />
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <style>
+    .admin-wrap { max-width: 900px; margin: 0 auto; padding: 7rem 2rem 4rem; }
+    .admin-header { text-align:center; margin-bottom: 3rem; }
+    .admin-header h1 { font-family:'Playfair Display',serif; font-size:2.5rem; color:var(--gold); }
+    .admin-header p  { color:var(--text-light); margin-top:.5rem; }
+    .admin-card { background:var(--white); border-radius:20px; padding:2rem; margin-bottom:2rem; box-shadow:var(--shadow); }
+    .admin-card h2 { font-family:'Playfair Display',serif; font-size:1.4rem; margin-bottom:1.5rem; color:var(--dark); display:flex; align-items:center; gap:.6rem; }
+    .admin-card h2 i { color:var(--brown); }
+    .admin-form-group { display:flex; flex-direction:column; gap:.4rem; margin-bottom:1rem; }
+    .admin-form-group label { font-size:.85rem; font-weight:600; color:var(--text); }
+    .admin-form-group input, .admin-form-group textarea, .admin-form-group select {
+      padding:.8rem 1rem; border-radius:10px; border:2px solid rgba(139,69,19,.15);
+      background:var(--cream); color:var(--text); font-family:'Inter',sans-serif; font-size:.9rem; outline:none;
+      transition: border-color .3s;
+    }
+    .admin-form-group input:focus, .admin-form-group textarea:focus { border-color:var(--brown); }
+    .admin-form-group textarea { min-height:100px; resize:vertical; }
+    .admin-btn { display:inline-flex; align-items:center; gap:.5rem; background:linear-gradient(135deg,var(--brown),var(--dark-brown)); color:#fff; border:none; padding:.8rem 1.8rem; border-radius:10px; font-weight:700; cursor:pointer; transition:all .3s; font-size:.95rem; }
+    .admin-btn:hover { transform:translateY(-2px); box-shadow:0 8px 25px rgba(139,69,19,.3); }
+    .admin-btn.danger { background:linear-gradient(135deg,#c0392b,#922b21); }
+    .admin-photos-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:1rem; margin-top:1.5rem; }
+    .admin-photo-item { position:relative; border-radius:12px; overflow:hidden; aspect-ratio:1; }
+    .admin-photo-item img { width:100%; height:100%; object-fit:cover; }
+    .admin-photo-item .photo-actions { position:absolute; inset:0; background:rgba(0,0,0,.6); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.5rem; opacity:0; transition:opacity .3s; }
+    .admin-photo-item:hover .photo-actions { opacity:1; }
+    .photo-del-btn { background:#c0392b; color:#fff; border:none; padding:.4rem .8rem; border-radius:8px; cursor:pointer; font-size:.8rem; }
+    .upload-zone { border:2px dashed rgba(139,69,19,.3); border-radius:16px; padding:2.5rem; text-align:center; cursor:pointer; transition:all .3s; margin-bottom:1rem; }
+    .upload-zone:hover { border-color:var(--brown); background:rgba(139,69,19,.04); }
+    .upload-zone i { font-size:2.5rem; color:var(--brown); margin-bottom:.8rem; }
+    .upload-zone p { color:var(--text-light); }
+    .stats-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; }
+    .stat-box { background:linear-gradient(135deg,var(--brown),var(--gold)); border-radius:14px; padding:1.5rem; text-align:center; color:#fff; }
+    .stat-box .num { font-family:'Playfair Display',serif; font-size:2.2rem; font-weight:900; }
+    .stat-box .lbl { font-size:.8rem; opacity:.85; margin-top:.3rem; }
+    .toast { position:fixed; bottom:2rem; right:2rem; background:var(--brown); color:#fff; padding:1rem 1.5rem; border-radius:12px; font-weight:600; opacity:0; transform:translateY(20px); transition:all .3s; z-index:9999; }
+    .toast.show { opacity:1; transform:translateY(0); }
+  </style>
+</head>
+<body>
+  <nav id="navbar" class="scrolled">
+    <div class="nav-container">
+      <a href="/" class="logo">
+        <span class="logo-icon"><i class="fas fa-hammer"></i></span>
+        <span class="logo-text">WoodCraft <span>Pro</span> — Admin</span>
+      </a>
+      <div class="nav-controls">
+        <button class="theme-toggle" id="themeToggle"><i class="fas fa-sun" id="themeIcon"></i></button>
+        <a href="/" class="hire-btn" style="text-decoration:none">← Website</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="admin-wrap">
+    <div class="admin-header">
+      <h1><i class="fas fa-tools"></i> Admin Panel</h1>
+      <p>Manage your portfolio, photos, bio, and view stats</p>
+    </div>
+
+    <!-- Stats -->
+    <div class="admin-card">
+      <h2><i class="fas fa-chart-bar"></i> Site Stats</h2>
+      <div class="stats-grid">
+        <div class="stat-box"><div class="num" id="statVisitors">—</div><div class="lbl">Total Visitors</div></div>
+        <div class="stat-box"><div class="num" id="statPhotos">—</div><div class="lbl">Photos</div></div>
+        <div class="stat-box"><div class="num" id="statToday">—</div><div class="lbl">Today</div></div>
+      </div>
+    </div>
+
+    <!-- Bio Editor -->
+    <div class="admin-card">
+      <h2><i class="fas fa-user-edit"></i> Edit Profile / Bio</h2>
+      <div class="admin-form-group"><label>Full Name</label><input id="bioName" type="text" placeholder="e.g. Ramesh Patel"/></div>
+      <div class="admin-form-group"><label>Title</label><input id="bioTitle" type="text" placeholder="e.g. Master Carpenter"/></div>
+      <div class="admin-form-group"><label>Years of Experience</label><input id="bioExp" type="number" placeholder="20"/></div>
+      <div class="admin-form-group"><label>Description (English)</label><textarea id="bioDescEn" placeholder="About your father..."></textarea></div>
+      <div class="admin-form-group"><label>Description (Gujarati)</label><textarea id="bioDescGu" placeholder="ગુજરાતીમાં..."></textarea></div>
+      <button class="admin-btn" onclick="saveBio()"><i class="fas fa-save"></i> Save Bio</button>
+    </div>
+
+    <!-- Upload Photos -->
+    <div class="admin-card">
+      <h2><i class="fas fa-cloud-upload-alt"></i> Upload Photos</h2>
+      <div class="upload-zone" id="uploadZone" onclick="document.getElementById('photoInput').click()">
+        <i class="fas fa-images"></i>
+        <p>Click or drag photos here to upload</p>
+        <small>Supports JPG, PNG, WEBP — max 10MB each</small>
+      </div>
+      <input type="file" id="photoInput" multiple accept="image/*" style="display:none" onchange="uploadPhotos(this.files)"/>
+      <div style="display:flex;gap:1rem;margin-bottom:1rem;flex-wrap:wrap;">
+        <div class="admin-form-group" style="flex:1;min-width:150px">
+          <label>Photo Title</label>
+          <input id="uploadTitle" type="text" placeholder="e.g. Walnut Table"/>
+        </div>
+        <div class="admin-form-group" style="flex:1;min-width:150px">
+          <label>Category</label>
+          <select id="uploadCat">
+            <option value="furniture">Furniture</option>
+            <option value="interior">Interior</option>
+            <option value="carving">Carving</option>
+            <option value="restoration">Restoration</option>
+          </select>
+        </div>
+      </div>
+      <div id="uploadProgress" style="display:none;margin-bottom:1rem;">
+        <i class="fas fa-spinner fa-spin"></i> Uploading...
+      </div>
+    </div>
+
+    <!-- Manage Photos -->
+    <div class="admin-card">
+      <h2><i class="fas fa-photo-video"></i> Manage Photos</h2>
+      <div class="admin-photos-grid" id="adminPhotosGrid">
+        <p style="color:var(--text-light)">Loading...</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    // ── theme ──
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    document.getElementById('themeToggle').addEventListener('click', () => {
+      const t = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', t);
+      localStorage.setItem('theme', t);
+      document.getElementById('themeIcon').className = t === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+    });
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg; t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 3000);
+    }
+
+    // ── load stats ──
+    async function loadStats() {
+      const v = await fetch('/api/visitor').then(r => r.json());
+      document.getElementById('statVisitors').textContent = v.visitors;
+      const g = await fetch('/api/gallery').then(r => r.json());
+      document.getElementById('statPhotos').textContent = g.photos.length;
+      document.getElementById('statToday').textContent = new Date().toLocaleDateString('en-IN');
+    }
+
+    // ── load bio ──
+    async function loadBio() {
+      const bio = await fetch('/api/bio').then(r => r.json());
+      document.getElementById('bioName').value    = bio.name        || '';
+      document.getElementById('bioTitle').value   = bio.title       || '';
+      document.getElementById('bioExp').value     = bio.experience  || '';
+      document.getElementById('bioDescEn').value  = bio.description    || '';
+      document.getElementById('bioDescGu').value  = bio.description_gu || '';
+    }
+
+    async function saveBio() {
+      const body = {
+        name        : document.getElementById('bioName').value,
+        title       : document.getElementById('bioTitle').value,
+        experience  : document.getElementById('bioExp').value,
+        description : document.getElementById('bioDescEn').value,
+        description_gu: document.getElementById('bioDescGu').value
+      };
+      await fetch('/api/bio', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body) });
+      showToast('✅ Bio saved!');
+    }
+
+    // ── upload photos ──
+    async function uploadPhotos(files) {
+      if (!files.length) return;
+      document.getElementById('uploadProgress').style.display = 'block';
+      const fd = new FormData();
+      for (const f of files) fd.append('photos', f);
+      fd.append('title',    document.getElementById('uploadTitle').value || 'Woodwork');
+      fd.append('category', document.getElementById('uploadCat').value);
+      await fetch('/api/gallery/upload', { method:'POST', body: fd });
+      document.getElementById('uploadProgress').style.display = 'none';
+      showToast('✅ Photos uploaded!');
+      loadAdminPhotos(); loadStats();
+    }
+
+    // ── drag & drop ──
+    const zone = document.getElementById('uploadZone');
+    zone.addEventListener('dragover', e => { e.preventDefault(); zone.style.borderColor = 'var(--gold)'; });
+    zone.addEventListener('dragleave', () => zone.style.borderColor = '');
+    zone.addEventListener('drop', e => { e.preventDefault(); zone.style.borderColor = ''; uploadPhotos(e.dataTransfer.files); });
+
+    // ── load manage photos ──
+    async function loadAdminPhotos() {
+      const grid = document.getElementById('adminPhotosGrid');
+      const data = await fetch('/api/gallery').then(r => r.json());
+      if (!data.photos.length) { grid.innerHTML = '<p style="color:var(--text-light)">No photos yet.</p>'; return; }
+      grid.innerHTML = data.photos.map(p => `
+        <div class="admin-photo-item">
+          <img src="${p.src}" alt="${p.title}" loading="lazy"/>
+          <div class="photo-actions">
+            <span style="color:#fff;font-size:.75rem;text-align:center;padding:0 .5rem">${p.title}</span>
+            <button class="photo-del-btn" onclick="deletePhoto('${p.filename}')"><i class="fas fa-trash"></i> Delete</button>
+          </div>
+        </div>`).join('');
+    }
+
+    async function deletePhoto(filename) {
+      if (!confirm('Delete this photo?')) return;
+      await fetch('/api/gallery/' + encodeURIComponent(filename), { method: 'DELETE' });
+      showToast('🗑 Photo deleted!');
+      loadAdminPhotos(); loadStats();
+    }
+
+    // init
+    loadStats(); loadBio(); loadAdminPhotos();
+  </script>
+</body>
+</html>

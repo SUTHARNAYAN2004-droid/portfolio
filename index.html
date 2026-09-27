@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" data-lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Master Craftsman | Artisan Carpentry</title>
+  <link rel="icon" type="image/png" href="/images/Screenshot 2026-09-27 122807.png" />
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+<body>
+
+  <!-- Loader -->
+  <div id="loader">
+    <div class="loader-content">
+      <div class="saw-blade"><i class="fas fa-fan"></i></div>
+      <p data-en="Crafting Excellence..." data-gu="ઉત્કૃષ્ટતા બનાવી રહ્યા છીએ...">Crafting Excellence...</p>
+    </div>
+  </div>
+
+  <!-- Custom Cursor -->
+  <div class="cursor"></div>
+  <div class="cursor-follower"></div>
+
+  <!-- Navigation -->
+  <nav id="navbar">
+    <div class="nav-container">
+      <div class="logo">
+        <span class="logo-icon"><i class="fas fa-hammer"></i></span>
+        <span class="logo-text">WoodCraft <span>Pro</span></span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#home"      class="nav-link active" data-en="Home"      data-gu="હોમ">Home</a></li>
+        <li><a href="#about"     class="nav-link"        data-en="About"     data-gu="વિશે">About</a></li>
+        <li><a href="#skills"    class="nav-link"        data-en="Skills"    data-gu="કૌશલ્ય">Skills</a></li>
+        <li><a href="#portfolio" class="nav-link"        data-en="Portfolio" data-gu="પોર્ટફોલિઓ">Portfolio</a></li>
+        <li><a href="#process"   class="nav-link"        data-en="Process"   data-gu="પ્રક્રિયા">Process</a></li>
+        <li><a href="#contact"   class="nav-link"        data-en="Contact"   data-gu="સંપર્ક">Contact</a></li>
+        <li><a href="/gallery"   class="nav-link"        data-en="Gallery"   data-gu="ગેલેરી">Gallery</a></li>
+      </ul>
+      <div class="nav-controls">
+        <!-- Language Toggle -->
+        <button class="lang-toggle" id="langToggle" title="Toggle Language">
+          <span class="lang-en">EN</span>
+          <span class="lang-divider">|</span>
+          <span class="lang-gu">ગુ</span>
+        </button>
+        <button class="hire-btn" data-en="Hire Me" data-gu="મને રાખો">Hire Me</button>
+      </div>
+      <div class="hamburger" id="hamburger">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <ul>
+      <li><a href="#home"      class="mob-link" data-en="Home"      data-gu="હોમ">Home</a></li>
+      <li><a href="#about"     class="mob-link" data-en="About"     data-gu="વિશે">About</a></li>
+      <li><a href="#skills"    class="mob-link" data-en="Skills"    data-gu="કૌશલ્ય">Skills</a></li>
+      <li><a href="#portfolio" class="mob-link" data-en="Portfolio" data-gu="પોર્ટફોલિઓ">Portfolio</a></li>
+      <li><a href="#process"   class="mob-link" data-en="Process"   data-gu="પ્રક્રિયા">Process</a></li>
+      <li><a href="#contact"   class="mob-link" data-en="Contact"   data-gu="સંપર્ક">Contact</a></li>
+      <li><a href="/gallery"   class="mob-link" data-en="Gallery"   data-gu="ગેલેરી">Gallery</a></li>
+    </ul>
+  </div>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="hero-bg">
+      <div class="wood-grain"></div>
+      <div class="hero-overlay"></div>
+    </div>
+    <div class="floating-particles" id="particles"></div>
+    <div class="hero-content">
+      <div class="hero-badge">
+        <i class="fas fa-award"></i>
+        <span data-en="20+ Years of Mastery" data-gu="૨૦+ વર્ષની નિપુણતા">20+ Years of Mastery</span>
+      </div>
+      <h1 class="hero-title">
+        <span class="line1" data-en="Crafting Dreams" data-gu="સ્વપ્નો ઘડવા">Crafting Dreams</span>
+        <span class="line2">
+          <span data-en="Into " data-gu="લાકડામાં ">Into </span><em data-en="Wood" data-gu="રૂપાંતર">Wood</em>
+        </span>
+      </h1>
+      <p class="hero-subtitle" data-en="Every piece tells a story. Every joint is a promise. Every finish is perfection. Welcome to the world of artisan carpentry where passion meets precision." data-gu="દરેક ટુકડો એક વાર્તા કહે છે. દરેક સાંધો એક વચન છે. દરેક ફિનિશ સંપૂર્ણ છે. સુથારીકામની દુનિયામાં આપનું સ્વાગત છે.">
+        Every piece tells a story. Every joint is a promise. Every finish is perfection.
+        Welcome to the world of artisan carpentry where passion meets precision.
+      </p>
+      <div class="hero-cta">
+        <a href="#portfolio" class="btn-primary">
+          <span data-en="View My Work" data-gu="મારું કામ જુઓ">View My Work</span>
+          <i class="fas fa-arrow-right"></i>
+        </a>
+        <a href="#contact" class="btn-secondary">
+          <i class="fas fa-phone"></i>
+          <span data-en="Get Quote" data-gu="ભાવ જાણો">Get Quote</span>
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-num" data-target="500">0</span><span>+</span>
+          <p data-en="Projects Done" data-gu="પ્રોજેક્ટ્સ">Projects Done</p>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-num" data-target="20">0</span><span>+</span>
+          <p data-en="Years Experience" data-gu="વર્ષ અનુભવ">Years Experience</p>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-num" data-target="300">0</span><span>+</span>
+          <p data-en="Happy Clients" data-gu="ખુશ ગ્રાહકો">Happy Clients</p>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <div class="scroll-indicator">
+        <span data-en="Scroll Down" data-gu="નીચે સ્ક્રોલ કરો">Scroll Down</span>
+        <div class="scroll-line"></div>
+      </div>
+    </div>
+    <div class="floating-tools">
+      <div class="tool t1"><i class="fas fa-hammer"></i></div>
+      <div class="tool t2"><i class="fas fa-ruler-combined"></i></div>
+      <div class="tool t3"><i class="fas fa-drafting-compass"></i></div>
+      <div class="tool t4"><i class="fas fa-screwdriver"></i></div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="about">
+    <div class="section-container">
+      <div class="about-image-wrap">
+        <div class="about-img-bg"></div>
+        <div class="about-img-placeholder">
+          <img src="images/WhatsApp Image 2026-09-13 at 11.42.34 PM.jpeg" alt="Master Craftsman" class="about-real-img" />
+        </div>
+        <div class="experience-badge">
+          <span class="exp-num" id="bioExp">20</span>
+          <span class="exp-text" data-en="Years of Excellence" data-gu="વર્ષ ઉત્કૃષ્ટતાના">Years of<br>Excellence</span>
+        </div>
+        <div class="about-tools">
+          <div class="mini-tool"><i class="fas fa-hammer"></i></div>
+          <div class="mini-tool"><i class="fas fa-saw"></i></div>
+          <div class="mini-tool"><i class="fas fa-ruler"></i></div>
+        </div>
+      </div>
+      <div class="about-content">
+        <div class="section-tag"><i class="fas fa-tree"></i>
+          <span data-en="About The Craftsman" data-gu="કારીગર વિશે">About The Craftsman</span>
+        </div>
+        <h2 class="section-title">
+          <span data-en="Turning Raw Wood Into" data-gu="કાચા લાકડાને">Turning Raw Wood Into</span><br>
+          <span class="highlight-text" data-en="Living Masterpieces" data-gu="જીવંત કળાકૃતિઓમાં ફેરવવી">Living Masterpieces</span>
+        </h2>
+        <p class="about-text" id="bioDesc">
+          With two decades of hands-on experience, I've dedicated my life to the ancient art of carpentry.
+          Every piece I create is a fusion of traditional craftsmanship and modern design — built to last generations.
+        </p>
+        <div class="craftsman-name-wrap">
+          <i class="fas fa-user-tie"></i>
+          <div>
+            <span class="craftsman-label" data-en="Master Craftsman" data-gu="મુખ્ય કારીગર">Master Craftsman</span>
+            <h3 class="craftsman-name" id="bioName">Master Craftsman</h3>
+            <span class="craftsman-title" id="bioTitle">Artisan Carpenter</span>
+          </div>
+        </div>
+        <div class="about-highlights">
+          <div class="highlight"><i class="fas fa-check-circle"></i><span data-en="100% Handcrafted & Custom Made" data-gu="૧૦૦% હાથથી બનાવેલ">100% Handcrafted & Custom Made</span></div>
+          <div class="highlight"><i class="fas fa-check-circle"></i><span data-en="Premium Quality Wood Selection" data-gu="ઉચ્ચ ગુણવત્તાનું લાકડું">Premium Quality Wood Selection</span></div>
+          <div class="highlight"><i class="fas fa-check-circle"></i><span data-en="On-Time Delivery Guaranteed" data-gu="સમયસર ડિલિવરી">On-Time Delivery Guaranteed</span></div>
+          <div class="highlight"><i class="fas fa-check-circle"></i><span data-en="5-Year Craftsmanship Warranty" data-gu="5 વર્ષની વોરંટી">5-Year Craftsmanship Warranty</span></div>
+        </div>
+        <div class="about-cta">
+          <a href="#portfolio" class="btn-primary" data-en="See My Craft" data-gu="કામ જુઓ">See My Craft <i class="fas fa-arrow-right"></i></a>
+          <a href="#contact"   class="btn-outline"  data-en="Let's Talk"  data-gu="વાત કરીએ">Let's Talk <i class="fas fa-comment"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills" class="skills">
+    <div class="skills-bg-text">SKILLS</div>
+    <div class="section-container">
+      <div class="section-header">
+        <div class="section-tag"><i class="fas fa-tools"></i> <span data-en="Expertise" data-gu="નિષ્ણાત">Expertise</span></div>
+        <h2 class="section-title"><span data-en="Mastered Skills & Specialties" data-gu="નિપુણ કૌશલ્યો અને વિશેષતાઓ">Mastered <span>Skills & Specialties</span></span></h2>
+        <p data-en="Decades of practice have honed these crafts to perfection" data-gu="દાયકાઓની પ્રેક્ટિસ દ્વારા આ કળાઓ સંપૂર્ણ બની છે">Decades of practice have honed these crafts to perfection</p>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-card" data-tilt>
+          <div class="skill-icon"><i class="fas fa-couch"></i></div>
+          <h3 data-en="Custom Furniture" data-gu="કસ્ટમ ફર્નિચર">Custom Furniture</h3>
+          <p data-en="Handcrafted tables, chairs, beds, and cabinets tailored to your exact vision." data-gu="હાથથી બનાવેલ ટેબલ, ખુરશી, પલંગ અને કેબિનેટ.">Handcrafted tables, chairs, beds, and cabinets tailored to your exact vision.</p>
+          <div class="skill-bar"><div class="skill-fill" data-width="97"></div></div>
+          <span class="skill-percent">97%</span>
+        </div>
+        <div class="skill-card" data-tilt>
+          <div class="skill-icon"><i class="fas fa-door-open"></i></div>
+          <h3 data-en="Door & Window Frames" data-gu="દરવાજા અને બારીઓ">Door & Window Frames</h3>
+          <p data-en="Precision-crafted frames combining structural integrity with elegant aesthetics." data-gu="માળખાકીય મજબૂતાઈ સાથે સુઘડ સૌંદર્ય.">Precision-crafted frames combining structural integrity with elegant aesthetics.</p>
+          <div class="skill-bar"><div class="skill-fill" data-width="95"></div></div>
+          <span class="skill-percent">95%</span>
+        </div>
+        <div class="skill-card" data-tilt>
+          <div class="skill-icon"><i class="fas fa-layer-group"></i></div>
+          <h3 data-en="Wood Flooring" data-gu="વૂડ ફ્લોરિંગ">Wood Flooring</h3>
+          <p data-en="Stunning hardwood floors installed with expert technique for lifetime durability." data-gu="આજીવન ટકાઉ, નિષ્ણાત ટેકનિક સાથે ઇન્સ્ટોલ.">Stunning hardwood floors with expert technique for lifetime durability.</p>
+          <div class="skill-bar"><div class="skill-fill" data-width="92"></div></div>
+          <span class="skill-percent">92%</span>
+        </div>
+        <div class="skill-card" data-tilt>
+          <div class="skill-icon"><i class="fas fa-th-large"></i></div>
+          <h3 data-en="Cabinetry & Storage" data-gu="કેબિનેટ અને સ્ટોરેજ">Cabinetry & Storage</h3>
+          <p data-en="Built-in storage solutions maximizing space without sacrificing beauty." data-gu="સૌંદર્ય જાળવીને જગ્યા વધારતા ઉકેલો.">Built-in storage solutions maximizing space without sacrificing beauty.</p>
+          <div class="skill-bar"><div class="skill-fill" data-width="98"></div></div>
+          <span class="skill-percent">98%</span>
+        </div>
+        <div class="skill-card" data-tilt>
+          <div class="skill-icon"><i class="fas fa-paint-brush"></i></div>
+          <h3 data-en="Wood Carving & Art" data-gu="લાકડાની કોતરણી">Wood Carving & Art</h3>
+          <p data-en="Intricate carvings and decorative woodwork elevating any space to gallery quality." data-gu="જટિલ કોતરણી અને સુશોભિત લાકડાકામ.">Intricate carvings and decorative woodwork elevating any space.</p>
+          <div class="skill-bar"><div class="skill-fill" data-width="90"></div></div>
+          <span class="skill-percent">90%</span>
+        </div>
+        <div class="skill-card" data-tilt>
+          <div class="skill-icon"><i class="fas fa-tools"></i></div>
+          <h3 data-en="Restoration & Repair" data-gu="પુનઃસ્થાપન અને સમારકામ">Restoration & Repair</h3>
+          <p data-en="Breathing new life into antique and damaged wood pieces with authentic techniques." data-gu="જૂના અને ક્ષતિગ્રસ્ત ટુકડાઓને નવું જીવન.">Breathing new life into antique and damaged wood pieces.</p>
+          <div class="skill-bar"><div class="skill-fill" data-width="93"></div></div>
+          <span class="skill-percent">93%</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Portfolio Section -->
+  <section id="portfolio" class="portfolio">
+    <div class="section-container">
+      <div class="section-header">
+        <div class="section-tag"><i class="fas fa-images"></i> <span data-en="Portfolio" data-gu="પોર્ટફોલિઓ">Portfolio</span></div>
+        <h2 class="section-title"><span data-en="Featured " data-gu="વિશેષ ">Featured </span><span>Masterpieces</span></h2>
+        <p data-en="A selection of works showcasing the art and soul of true carpentry" data-gu="સાચી સુથારીકામની કળા અને આત્માની ઝલક">A selection of works showcasing the art and soul of true carpentry</p>
+      </div>
+      <div class="portfolio-grid" id="portfolioGrid">
+        <!-- injected by JS from API -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Process Section -->
+  <section id="process" class="process">
+    <div class="process-bg"></div>
+    <div class="section-container">
+      <div class="section-header light">
+        <div class="section-tag"><i class="fas fa-cogs"></i> <span data-en="How It Works" data-gu="કેવી રીતે કામ કરે">How It Works</span></div>
+        <h2 class="section-title"><span data-en="The Craft " data-gu="કારીગરી ">The Craft </span><span data-en="Process" data-gu="પ્રક્રિયા">Process</span></h2>
+        <p data-en="From your vision to a finished masterpiece — every step matters" data-gu="તમારા વિઝનથી તૈયાર કળાકૃતિ સુધી — દરેક પગલું મહત્વનું છે">From your vision to a finished masterpiece — every step matters</p>
+      </div>
+      <div class="process-timeline">
+        <div class="process-step">
+          <div class="step-number">01</div>
+          <div class="step-icon"><i class="fas fa-comments"></i></div>
+          <div class="step-content">
+            <h3 data-en="Consultation" data-gu="સલાહ">Consultation</h3>
+            <p data-en="We sit together to understand your vision and the story you want your piece to tell." data-gu="અમે તમારું વિઝન સમજવા સાથે બેસીએ છીએ.">We sit together to understand your vision and the story you want your piece to tell.</p>
+          </div>
+        </div>
+        <div class="process-connector"><i class="fas fa-chevron-right"></i></div>
+        <div class="process-step">
+          <div class="step-number">02</div>
+          <div class="step-icon"><i class="fas fa-drafting-compass"></i></div>
+          <div class="step-content">
+            <h3 data-en="Design & Planning" data-gu="ડિઝાઇન અને આયોજન">Design & Planning</h3>
+            <p data-en="Blueprints drawn, wood species selected, every measurement meticulously planned." data-gu="બ્લૂ-પ્રિન્ટ, લાકડાની પ્રજાતિ, દરેક માપ.">Blueprints drawn, wood species selected, every measurement meticulously planned.</p>
+          </div>
+        </div>
+        <div class="process-connector"><i class="fas fa-chevron-right"></i></div>
+        <div class="process-step">
+          <div class="step-number">03</div>
+          <div class="step-icon"><i class="fas fa-hammer"></i></div>
+          <div class="step-content">
+            <h3 data-en="Crafting" data-gu="નિર્માણ">Crafting</h3>
+            <p data-en="The wood comes alive. Each cut, joint, and finish executed with master-level precision." data-gu="લાકડું જીવંત બને છે. દરેક કટ, સાંધો ચોક્કસ.">The wood comes alive. Each cut, joint, and finish with master precision.</p>
+          </div>
+        </div>
+        <div class="process-connector"><i class="fas fa-chevron-right"></i></div>
+        <div class="process-step">
+          <div class="step-number">04</div>
+          <div class="step-icon"><i class="fas fa-truck"></i></div>
+          <div class="step-content">
+            <h3 data-en="Delivery & Install" data-gu="ડિલિવરી અને ઇન્સ્ટોલ">Delivery & Install</h3>
+            <p data-en="Your masterpiece delivered, installed, set in its forever home — right on schedule." data-gu="તમારી કળાકૃતિ ઘરે પહોંચાડી ઇન્સ્ટોલ.">Your masterpiece delivered, installed in its forever home — on schedule.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="contact">
+    <div class="section-container">
+      <div class="section-header">
+        <div class="section-tag"><i class="fas fa-phone"></i> <span data-en="Contact" data-gu="સંપર્ક">Contact</span></div>
+        <h2 class="section-title">
+          <span data-en="Let's Build Something " data-gu="ચાલો કંઈક ">Let's Build Something </span>
+          <span data-en="Together" data-gu="સાથે બનાવીએ">Together</span>
+        </h2>
+        <p data-en="Have a project in mind? Let's talk about bringing your vision to life." data-gu="કોઈ પ્રોજેક્ટ છે? ચાલો તમારું સ્વપ્ન સાકાર કરીએ.">Have a project in mind? Let's talk about bringing your vision to life.</p>
+      </div>
+      <div class="contact-wrap single">
+        <div class="contact-info">
+          <div class="info-card">
+            <div class="info-icon"><i class="fas fa-phone-alt"></i></div>
+            <div>
+              <h4 data-en="Call Me" data-gu="ફોન કરો">Call Me</h4>
+              <p>+91 9726034545</p>
+            </div>
+          </div>
+          <!-- WhatsApp floating CTA -->
+          <a href="https://wa.me/919726034545" target="_blank" class="whatsapp-btn">
+            <i class="fab fa-whatsapp"></i>
+            <span data-en="Chat on WhatsApp" data-gu="WhatsApp પર વાત કરો">Chat on WhatsApp</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-logo">
+        <i class="fas fa-hammer"></i>
+        <span>WoodCraft <strong>Pro</strong></span>
+      </div>
+      <p class="footer-tagline" data-en='"Where every grain tells a story, and every piece is a legacy."' data-gu='"જ્યાં દરેક રેસો એક વાર્તા કહે છે, અને દરેક ટુકડો એક વારસો છે."'>"Where every grain tells a story, and every piece is a legacy."</p>
+      <div class="footer-links">
+        <a href="#home"      data-en="Home"      data-gu="હોમ">Home</a>
+        <a href="#about"     data-en="About"     data-gu="વિશે">About</a>
+        <a href="#portfolio" data-en="Portfolio" data-gu="પોર્ટફોલિઓ">Portfolio</a>
+        <a href="/gallery"   data-en="Gallery"   data-gu="ગેલેરી">Gallery</a>
+        <a href="#contact"   data-en="Contact"   data-gu="સંપર્ક">Contact</a>
+      </div>
+      <p class="footer-copy">© 2026 WoodCraft Pro. Handcrafted with <i class="fas fa-heart"></i> and sawdust.</p>
+    </div>
+  </footer>
+
+  <!-- WhatsApp Float Button -->
+  <a href="https://wa.me/919726034545" target="_blank" class="whatsapp-float">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <script src="script.js"></script>
+</body>
+</html>

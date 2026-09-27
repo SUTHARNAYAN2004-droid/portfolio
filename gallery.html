@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" data-lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gallery | WoodCraft Pro</title>
+  <link rel="icon" type="image/png" href="/images/Screenshot 2026-09-27 122807.png" />
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+</head>
+<body>
+
+  <!-- Custom Cursor -->
+  <div class="cursor"></div>
+  <div class="cursor-follower"></div>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox">
+    <button class="lb-close" id="lbClose"><i class="fas fa-times"></i></button>
+    <button class="lb-prev"  id="lbPrev"><i class="fas fa-chevron-left"></i></button>
+    <button class="lb-next"  id="lbNext"><i class="fas fa-chevron-right"></i></button>
+    <div class="lb-content">
+      <img id="lbImg" src="" alt=""/>
+      <div class="lb-caption" id="lbCaption"></div>
+    </div>
+  </div>
+
+  <!-- Navbar -->
+  <nav id="navbar" class="scrolled">
+    <div class="nav-container">
+      <a href="/" class="logo">
+        <span class="logo-icon"><i class="fas fa-hammer"></i></span>
+        <span class="logo-text">WoodCraft <span>Pro</span></span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="/"        class="nav-link" data-en="Home"    data-gu="હોમ">Home</a></li>
+        <li><a href="/gallery" class="nav-link active" data-en="Gallery" data-gu="ગેલેરી">Gallery</a></li>
+        <li><a href="/#contact" class="nav-link" data-en="Contact" data-gu="સંપર્ક">Contact</a></li>
+      </ul>
+      <div class="nav-controls">
+        <button class="lang-toggle" id="langToggle" title="Toggle Language">
+          <span class="lang-en">EN</span>
+          <span class="lang-divider">|</span>
+          <span class="lang-gu">ગુ</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Gallery Hero -->
+  <div class="gallery-hero">
+    <div class="gallery-hero-bg">
+      <div class="wood-grain"></div>
+      <div class="gallery-hero-overlay"></div>
+    </div>
+    <div class="gallery-hero-content">
+      <div class="hero-badge">
+        <i class="fas fa-images"></i>
+        <span data-en="Our Work Gallery" data-gu="અમારી કામ ગેલેરી">Our Work Gallery</span>
+      </div>
+      <h1 data-en="Photo Gallery" data-gu="ફોટો ગેલેરી">Photo Gallery</h1>
+      <p data-en="Every photo is a testament to craft, dedication, and love for wood." data-gu="દરેક ફોટો કળા, સમર્પણ અને લાકડા પ્રત્યેના પ્રેમની સાક્ષી છે.">Every photo is a testament to craft, dedication, and love for wood.</p>
+    </div>
+  </div>
+
+  <!-- Filter -->
+  <div class="gallery-filter-wrap">
+    <div class="portfolio-filter">
+      <button class="filter-btn active" data-filter="all"         data-en="All"         data-gu="બધા">All</button>
+      <button class="filter-btn"        data-filter="furniture"   data-en="Furniture"   data-gu="ફર્નિચર">Furniture</button>
+      <button class="filter-btn"        data-filter="interior"    data-en="Interior"    data-gu="ઇન્ટેરિઓર">Interior</button>
+      <button class="filter-btn"        data-filter="carving"     data-en="Carving"     data-gu="કોતરણી">Carving</button>
+      <button class="filter-btn"        data-filter="restoration" data-en="Restoration" data-gu="પુનઃસ્થાપન">Restoration</button>
+    </div>
+  </div>
+
+  <!-- Gallery Grid -->
+  <div class="gallery-section">
+    <div class="gallery-page-grid" id="galleryPageGrid">
+      <div class="gallery-loading">
+        <i class="fas fa-spinner fa-spin"></i>
+        <span>Loading...</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-logo">
+        <i class="fas fa-hammer"></i>
+        <span>WoodCraft <strong>Pro</strong></span>
+      </div>
+      <p class="footer-tagline" data-en='"Where every grain tells a story, and every piece is a legacy."' data-gu='"જ્યાં દરેક રેસો એક વાર્તા કહે છે, અને દરેક ટુકડો એક વારસો છે."'>"Where every grain tells a story, and every piece is a legacy."</p>
+      <div class="footer-links">
+        <a href="/"        data-en="Home"    data-gu="હોમ">Home</a>
+        <a href="/gallery" data-en="Gallery" data-gu="ગેલેરી">Gallery</a>
+        <a href="/#contact" data-en="Contact" data-gu="સંપર્ક">Contact</a>
+      </div>
+      <p class="footer-copy">© 2026 WoodCraft Pro. Handcrafted with <i class="fas fa-heart"></i> and sawdust.</p>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/919726034545" target="_blank" class="whatsapp-float">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+  <button class="back-to-top" id="backToTop">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <script src="script.js"></script>
+</body>
+</html>
