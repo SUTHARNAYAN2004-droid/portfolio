@@ -1057,3 +1057,50 @@ body:has(#galleryPageGrid) {
   }
   .contact-form-wrap { padding: 1.5rem; }
 }
+
+/* ===================== REVIEW FORM ===================== */
+.review-form-wrap {
+  max-width: 650px;
+  margin: 0 auto;
+  background: var(--white);
+  border-radius: 24px;
+  padding: 2.5rem;
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(139,69,19,0.08);
+}
+.review-form { display: flex; flex-direction: column; gap: 1.2rem; }
+.review-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+
+/* Star rating */
+.star-rating {
+  display: flex; gap: 0.4rem; align-items: center;
+  padding: 0.6rem 0;
+}
+.star-rating i {
+  font-size: 1.6rem;
+  color: rgba(139,69,19,0.2);
+  cursor: pointer;
+  transition: color 0.2s, transform 0.15s;
+}
+.star-rating i:hover,
+.star-rating i.active {
+  color: var(--gold);
+  transform: scale(1.2);
+}
+
+.review-submit-btn {
+  display: flex; align-items: center; justify-content: center; gap: 0.6rem;
+  background: linear-gradient(135deg, var(--brown), var(--dark-brown));
+  color: var(--white); border: none;
+  padding: 1rem 2rem; border-radius: 12px;
+  font-size: 1rem; font-weight: 700; cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 6px 25px rgba(139,69,19,0.3);
+  width: 100%;
+}
+.review-submit-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 35px rgba(139,69,19,0.4); }
+
+@media (max-width: 600px) {
+  .review-form-row { grid-template-columns: 1fr; }
+  .review-form-wrap { padding: 1.5rem; }
+}

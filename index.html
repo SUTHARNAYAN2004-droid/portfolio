@@ -308,58 +308,45 @@
     </div>
   </section>
 
-  <!-- Testimonials Section -->
+  <!-- Reviews Section -->
   <section id="testimonials" class="testimonials">
     <div class="section-container">
       <div class="section-header">
-        <div class="section-tag"><i class="fas fa-star"></i> <span data-en="Testimonials" data-gu="પ્રતિભાવ">Testimonials</span></div>
-        <h2 class="section-title"><span data-en="What Clients " data-gu="ગ્રાહકો ">What Clients </span><span data-en="Say" data-gu="શું કહે છે">Say</span></h2>
-        <p data-en="Real words from real people who trusted us with their dream projects." data-gu="એ લોકોના સાચા શબ્દો જેમણે અમારા પર વિશ્વાસ મૂક્યો.">Real words from real people who trusted us with their dream projects.</p>
+        <div class="section-tag"><i class="fas fa-star"></i> <span data-en="Reviews" data-gu="સમીક્ષા">Reviews</span></div>
+        <h2 class="section-title"><span data-en="Leave a " data-gu="તમારી ">Leave a </span><span data-en="Review" data-gu="સમીક્ષા આપો">Review</span></h2>
+        <p data-en="Worked with us? Share your experience and help others." data-gu="અમારી સાથે કામ કર્યું? તમારો અનુભવ શેર કરો.">Worked with us? Share your experience and help others.</p>
       </div>
-      <div class="testimonials-slider">
-        <div class="testimonial-track" id="testimonialTrack">
-          <div class="testimonial-card">
-            <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
-            <p data-en="The wardrobe Nareshbhai built for us is absolutely stunning. The finish, the joints, the attention to detail — pure artistry. Our home feels transformed." data-gu="નરેશભાઈએ અમારા માટે બનાવેલ વોર્ડરોબ અત્યંત સુંદર છે. ફિનિશ, સાંધા, વિગતો પ્રત્યે ધ્યાન — શુદ્ધ કળા.">"The wardrobe Nareshbhai built for us is absolutely stunning. The finish, the joints, the attention to detail — pure artistry. Our home feels transformed."</p>
-            <div class="reviewer">
-              <div class="reviewer-avatar">R</div>
-              <div class="reviewer-info">
-                <strong>Ramesh Patel</strong>
-                <span data-en="Surat, Gujarat" data-gu="સુરત, ગુજરાત">Surat, Gujarat</span>
-                <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+      <div class="review-form-wrap">
+        <form class="review-form" id="reviewForm">
+          <div class="review-form-row">
+            <div class="form-group">
+              <label data-en="Your Name" data-gu="તમારું નામ">Your Name</label>
+              <input type="text" id="reviewName" placeholder="Ramesh Patel" required />
+            </div>
+            <div class="form-group">
+              <label data-en="Your Rating" data-gu="તમારું રેટિંગ">Your Rating</label>
+              <div class="star-rating" id="starRating">
+                <i class="fas fa-star" data-val="1"></i>
+                <i class="fas fa-star" data-val="2"></i>
+                <i class="fas fa-star" data-val="3"></i>
+                <i class="fas fa-star" data-val="4"></i>
+                <i class="fas fa-star" data-val="5"></i>
               </div>
             </div>
           </div>
-          <div class="testimonial-card">
-            <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
-            <p data-en="We had our entire kitchen cabinets redone. The quality is exceptional — solid wood, perfect alignment, and delivered on time. Highly recommend!" data-gu="અમારી આખી રસોડાની કેબિનેટ ફરીથી બનાવડાવી. ગુણવત્તા અત્યયત સારી — નક્કર લાકડું, ચોક્કસ સ્થાપન, સમયસર ડિલિવરી.">"We had our entire kitchen cabinets redone. The quality is exceptional — solid wood, perfect alignment, and delivered on time. Highly recommend!"</p>
-            <div class="reviewer">
-              <div class="reviewer-avatar">M</div>
-              <div class="reviewer-info">
-                <strong>Meena Shah</strong>
-                <span data-en="Ahmedabad, Gujarat" data-gu="અમદાવાદ, ગુજરાત">Ahmedabad, Gujarat</span>
-                <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-              </div>
-            </div>
+          <div class="form-group">
+            <label data-en="Your Review" data-gu="તમારી સમીક્ષા">Your Review</label>
+            <textarea id="reviewText" rows="4" placeholder="Tell others about your experience..." required></textarea>
           </div>
-          <div class="testimonial-card">
-            <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
-            <p data-en="The carved door panel for our pooja room is beyond what I imagined. Every detail is perfect. People who visit our home always ask about it first." data-gu="અમારા પૂજા ઓરડા માટેની કોતરણીવાળી દરવાજાની પેનલ મારી કલ્પના કરતા વધુ સુંદર છે.">"The carved door panel for our pooja room is beyond what I imagined. Every detail is perfect. People who visit our home always ask about it first."</p>
-            <div class="reviewer">
-              <div class="reviewer-avatar">J</div>
-              <div class="reviewer-info">
-                <strong>Jayesh Desai</strong>
-                <span data-en="Vadodara, Gujarat" data-gu="વડોદરા, ગુજરાત">Vadodara, Gujarat</span>
-                <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-              </div>
-            </div>
+          <button type="submit" class="submit-btn review-submit-btn">
+            <span data-en="Submit Review" data-gu="સમીક્ષા સબમિટ કરો">Submit Review</span>
+            <i class="fas fa-paper-plane"></i>
+          </button>
+          <div class="form-success" id="reviewSuccess">
+            <i class="fas fa-check-circle"></i>
+            <span data-en="Thank you! Your review has been submitted." data-gu="આભાર! તમારી સમીક્ષા સબમિટ થઈ.">Thank you! Your review has been submitted.</span>
           </div>
-        </div>
-        <div class="slider-controls">
-          <button class="slider-btn" id="prevBtn"><i class="fas fa-chevron-left"></i></button>
-          <div class="slider-dots" id="sliderDots"></div>
-          <button class="slider-btn" id="nextBtn"><i class="fas fa-chevron-right"></i></button>
-        </div>
+        </form>
       </div>
     </div>
   </section>

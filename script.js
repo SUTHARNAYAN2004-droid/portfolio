@@ -390,6 +390,42 @@ if (hireBtn) {
   });
 }
 
+// ===================== REVIEW FORM =====================
+(function initReviewForm() {
+  const form    = document.getElementById('reviewForm');
+  const stars   = document.querySelectorAll('#starRating i');
+  const success = document.getElementById('reviewSuccess');
+  let selectedRating = 0;
+
+  stars.forEach(star => {
+    star.addEventListener('mouseover', () => {
+      stars.forEach(s => s.classList.toggle('active', s.dataset.val <= star.dataset.val));
+    });
+    star.addEventListener('mouseout', () => {
+      stars.forEach(s => s.classList.toggle('active', s.dataset.val <= selectedRating));
+    });
+    star.addEventListener('click', () => {
+      selectedRating = star.dataset.val;
+      stars.forEach(s => s.classList.toggle('active', s.dataset.val <= selectedRating));
+    });
+  });
+
+  if (!form) return;
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const btn = form.querySelector('.review-submit-btn');
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+    btn.disabled = true;
+    setTimeout(() => {
+      btn.innerHTML = '<span>Submit Review</span><i class="fas fa-paper-plane"></i>';
+      btn.disabled = false;
+      if (success) { success.style.display = 'flex'; setTimeout(() => success.style.display = 'none', 4000); }
+      form.reset(); selectedRating = 0;
+      stars.forEach(s => s.classList.remove('active'));
+    }, 1200);
+  });
+})();
+
 // ===================== TILT EFFECT =====================
 document.querySelectorAll('[data-tilt]').forEach(card => {
   card.addEventListener('mousemove', e => {
