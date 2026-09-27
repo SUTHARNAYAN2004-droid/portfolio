@@ -11,48 +11,62 @@ const PORT = 3000;
 // ── middleware ──────────────────────────────────────────────
 app.use(cors());
 app.use(express.json());
-app.use(express.static(__dirname));          // serve frontend
+app.use(express.static(__dirname));
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
-// ── data file paths ─────────────────────────────────────────
-const DATA_FILE    = path.join(__dirname, 'data', 'data.json');
-const GALLERY_FILE = path.join(__dirname, 'data', 'gallery.json');
+// ── detect if filesystem is writable (local) or read-only (Vercel) ──
+const DATA_DIR     = path.join(__dirname, 'data');
+const DATA_FILE    = path.join(DATA_DIR, 'data.json');
+const GALLERY_FILE = path.join(DATA_DIR, 'gallery.json');
 
-// create data dir if missing
-if (!fs.existsSync(path.join(__dirname, 'data')))
-  fs.mkdirSync(path.join(__dirname, 'data'));
+let isWritable = false;
+try {
+  if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
+  fs.accessSync(DATA_DIR, fs.constants.W_OK);
+  isWritable = true;
+} catch (e) {
+  isWritable = false;
+}
 
-// default data
-const defaultData = {
-  visitors : 0,
+// ── in-memory fallback (used on Vercel) ──
+let memData = {
+  visitors: 0,
   bio: {
     name       : "Master Craftsman",
     title      : "Artisan Carpenter",
     experience : "20",
     description: "With two decades of hands-on experience, I've dedicated my life to the ancient art of carpentry. Every piece I create is a fusion of traditional craftsmanship and modern design — built to last generations.",
-    description_gu: "વીસ વર્ષના અનુભવ સાથે, મેં મારું જીવન સુથારીકામની પ્રાચીન કળાને સમર્પિત કર્યું છે. હું જે દરેક ટુકડો બનાવું છું તે પરંપરાગત કારીગરી અને આધુનિક ડિઝાઇનનું સંયોજન છે."
+    description_gu: "વીસ વર્ષના અનુભવ સાથે, મેં મારું જીવન સુથારીકામની પ્રાચીન કળાને સમર્પિત કર્યું છે."
   }
 };
+let memGallery = { photos: [] };
 
-const defaultGallery = { photos: [] };
-
+// ── data helpers ──────────────────────────────────────────────
 function readData() {
+  if (!isWritable) return memData;
   try { return JSON.parse(fs.readFileSync(DATA_FILE, 'utf8')); }
-  catch { fs.writeFileSync(DATA_FILE, JSON.stringify(defaultData, null, 2)); return defaultData; }
+  catch { fs.writeFileSync(DATA_FILE, JSON.stringify(memData, null, 2)); return memData; }
 }
-function saveData(d) { fs.writeFileSync(DATA_FILE, JSON.stringify(d, null, 2)); }
+function saveData(d) {
+  if (!isWritable) { memData = d; return; }
+  fs.writeFileSync(DATA_FILE, JSON.stringify(d, null, 2));
+}
 
 function readGallery() {
+  if (!isWritable) return memGallery;
   try { return JSON.parse(fs.readFileSync(GALLERY_FILE, 'utf8')); }
-  catch { fs.writeFileSync(GALLERY_FILE, JSON.stringify(defaultGallery, null, 2)); return defaultGallery; }
+  catch { fs.writeFileSync(GALLERY_FILE, JSON.stringify(memGallery, null, 2)); return memGallery; }
 }
-function saveGallery(g) { fs.writeFileSync(GALLERY_FILE, JSON.stringify(g, null, 2)); }
+function saveGallery(g) {
+  if (!isWritable) { memGallery = g; return; }
+  fs.writeFileSync(GALLERY_FILE, JSON.stringify(g, null, 2));
+}
 
-// ── multer (image uploads) ───────────────────────────────────
+// ── multer (image uploads) ────────────────────────────────────
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     const dir = path.join(__dirname, 'images');
-    if (!fs.existsSync(dir)) fs.mkdirSync(dir);
+    if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
     cb(null, dir);
   },
   filename: (req, file, cb) => {
@@ -60,7 +74,10 @@ const storage = multer.diskStorage({
     cb(null, unique + path.extname(file.originalname));
   }
 });
-const upload = multer({ storage, limits: { fileSize: 10 * 1024 * 1024 } });
+const upload = multer({
+  storage: isWritable ? storage : multer.memoryStorage(),
+  limits: { fileSize: 10 * 1024 * 1024 }
+});
 
 // ══════════════════════════════════════════════════════════════
 //  API ROUTES
@@ -75,11 +92,10 @@ app.post('/api/visitor', (req, res) => {
 });
 
 app.get('/api/visitor', (req, res) => {
-  const d = readData();
-  res.json({ visitors: d.visitors });
+  res.json({ visitors: readData().visitors });
 });
 
-// ── bio / profile ────────────────────────────────────────────
+// ── bio ───────────────────────────────────────────────────────
 app.get('/api/bio', (req, res) => {
   res.json(readData().bio);
 });
@@ -91,23 +107,32 @@ app.post('/api/bio', (req, res) => {
   res.json({ success: true, bio: d.bio });
 });
 
-// ── gallery ──────────────────────────────────────────────────
+// ── gallery ───────────────────────────────────────────────────
 app.get('/api/gallery', (req, res) => {
-  // merge static images + uploaded images
   const gallery = readGallery();
-  const staticImgs = fs.readdirSync(path.join(__dirname, 'images'))
-    .filter(f => /\.(jpg|jpeg|png|gif|webp)$/i.test(f) && !gallery.photos.find(p => p.filename === f))
-    .map(f => ({ filename: f, title: 'Woodwork', category: 'furniture', src: '/images/' + encodeURIComponent(f) }));
+  const imagesDir = path.join(__dirname, 'images');
+  let staticImgs = [];
+  try {
+    staticImgs = fs.readdirSync(imagesDir)
+      .filter(f => /\.(jpg|jpeg|png|gif|webp)$/i.test(f) && !gallery.photos.find(p => p.filename === f))
+      .map(f => ({
+        filename: f,
+        title   : 'Woodwork',
+        category: 'furniture',
+        src     : '/images/' + encodeURIComponent(f)
+      }));
+  } catch (e) { staticImgs = []; }
   res.json({ photos: [...gallery.photos, ...staticImgs] });
 });
 
 app.post('/api/gallery/upload', upload.array('photos', 20), (req, res) => {
+  if (!isWritable) return res.json({ success: false, message: 'Uploads not supported in this environment.' });
   const gallery = readGallery();
   const added = req.files.map(file => ({
-    filename : file.filename,
-    title    : req.body.title    || 'Woodwork',
-    category : req.body.category || 'furniture',
-    src      : '/images/' + file.filename
+    filename: file.filename,
+    title   : req.body.title    || 'Woodwork',
+    category: req.body.category || 'furniture',
+    src     : '/images/' + file.filename
   }));
   gallery.photos.push(...added);
   saveGallery(gallery);
@@ -115,13 +140,13 @@ app.post('/api/gallery/upload', upload.array('photos', 20), (req, res) => {
 });
 
 app.delete('/api/gallery/:filename', (req, res) => {
-  const filename = req.params.filename;
   const gallery  = readGallery();
-  gallery.photos  = gallery.photos.filter(p => p.filename !== filename);
+  gallery.photos = gallery.photos.filter(p => p.filename !== req.params.filename);
   saveGallery(gallery);
-  // delete physical file
-  const filePath = path.join(__dirname, 'images', filename);
-  if (fs.existsSync(filePath)) fs.unlinkSync(filePath);
+  if (isWritable) {
+    const filePath = path.join(__dirname, 'images', req.params.filename);
+    if (fs.existsSync(filePath)) fs.unlinkSync(filePath);
+  }
   res.json({ success: true });
 });
 
@@ -132,28 +157,33 @@ app.patch('/api/gallery/:filename', (req, res) => {
   res.json({ success: true });
 });
 
-// ── serve pages ──────────────────────────────────────────────
-app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'index.html')));
+// ── serve pages ───────────────────────────────────────────────
+app.get('/',        (req, res) => res.sendFile(path.join(__dirname, 'index.html')));
 app.get('/gallery', (req, res) => res.sendFile(path.join(__dirname, 'gallery.html')));
 app.get('/admin',   (req, res) => res.sendFile(path.join(__dirname, 'admin.html')));
 
 // ══════════════════════════════════════════════════════════════
-//  START SERVER
+//  START SERVER (local only — Vercel uses export)
 // ══════════════════════════════════════════════════════════════
-app.listen(PORT, '0.0.0.0', () => {
-  let localIP = 'localhost';
-  for (const ifaces of Object.values(os.networkInterfaces())) {
-    for (const iface of ifaces) {
-      if (iface.family === 'IPv4' && !iface.internal) { localIP = iface.address; break; }
+if (require.main === module) {
+  app.listen(PORT, '0.0.0.0', () => {
+    let localIP = 'localhost';
+    for (const ifaces of Object.values(os.networkInterfaces())) {
+      for (const iface of ifaces) {
+        if (iface.family === 'IPv4' && !iface.internal) { localIP = iface.address; break; }
+      }
     }
-  }
-  console.log('\n╔══════════════════════════════════════════╗');
-  console.log('║   🪵  WoodCraft Pro — Server Running  🪵  ║');
-  console.log('╠══════════════════════════════════════════╣');
-  console.log(`║  💻 Local  : http://localhost:${PORT}         ║`);
-  console.log(`║  📱 WiFi   : http://${localIP}:${PORT}   ║`);
-  console.log('╠══════════════════════════════════════════╣');
-  console.log(`║  🔧 Admin  : http://localhost:${PORT}/admin   ║`);
-  console.log(`║  🖼  Gallery: http://localhost:${PORT}/gallery ║`);
-  console.log('╚══════════════════════════════════════════╝\n');
-});
+    console.log('\n╔══════════════════════════════════════════╗');
+    console.log('║   🪵  WoodCraft Pro — Server Running  🪵  ║');
+    console.log('╠══════════════════════════════════════════╣');
+    console.log(`║  💻 Local  : http://localhost:${PORT}         ║`);
+    console.log(`║  📱 WiFi   : http://${localIP}:${PORT}   ║`);
+    console.log('╠══════════════════════════════════════════╣');
+    console.log(`║  🔧 Admin  : http://localhost:${PORT}/admin   ║`);
+    console.log(`║  🖼  Gallery: http://localhost:${PORT}/gallery ║`);
+    console.log('╚══════════════════════════════════════════╝\n');
+  });
+}
+
+// Vercel needs this export
+module.exports = app;
