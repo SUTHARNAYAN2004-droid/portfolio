@@ -21,8 +21,8 @@ const GALLERY_FILE = path.join(DATA_DIR, 'gallery.json');
 
 let isWritable = false;
 try {
+  fs.accessSync(__dirname, fs.constants.W_OK);
   if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
-  fs.accessSync(DATA_DIR, fs.constants.W_OK);
   isWritable = true;
 } catch (e) {
   isWritable = false;
