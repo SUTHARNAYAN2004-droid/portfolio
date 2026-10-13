@@ -1,3 +1,5 @@
 node_modules/
-data/
 .env
+# Track data folder but ignore auto-generated files
+data/data.json
+data/reviews.json
