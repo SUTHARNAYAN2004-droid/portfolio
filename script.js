@@ -43,12 +43,23 @@ const hamburger = document.getElementById('hamburger');
 const mobileMenu = document.getElementById('mobileMenu');
 
 if (navbar) {
-  window.addEventListener('scroll', () => {
-    navbar.classList.toggle('scrolled', window.scrollY > 60);
-    const btn = document.getElementById('backToTop');
-    if (btn) btn.classList.toggle('show', window.scrollY > 400);
-    updateActiveNav();
-  });
+  // On gallery page navbar is always scrolled (dark), only toggle on homepage
+  const isGalleryPage = !!document.getElementById('galleryPageGrid');
+  if (!isGalleryPage) {
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 60);
+      const btn = document.getElementById('backToTop');
+      if (btn) btn.classList.toggle('show', window.scrollY > 400);
+      updateActiveNav();
+    });
+  } else {
+    // Always keep scrolled on gallery page
+    navbar.classList.add('scrolled');
+    window.addEventListener('scroll', () => {
+      const btn = document.getElementById('backToTop');
+      if (btn) btn.classList.toggle('show', window.scrollY > 400);
+    });
+  }
 }
 
 if (hamburger && mobileMenu) {
@@ -202,75 +213,11 @@ if (portfolioGrid) {
   const countEl = document.getElementById('visitorCount');
   if (!countEl) return;
   try {
-    // increment on each visit
     const res  = await fetch('/api/visitor', { method: 'POST' });
     const data = await res.json();
     countEl.textContent = data.visitors;
   } catch (e) { countEl.textContent = '—'; }
 })();
-
-// ===================== TESTIMONIALS SLIDER =====================
-(function initTestimonials() {
-  const track        = document.getElementById('testimonialTrack');
-  const dotsContainer = document.getElementById('sliderDots');
-  const prevBtn      = document.getElementById('prevBtn');
-  const nextBtn      = document.getElementById('nextBtn');
-  if (!track) return;
-
-  const cards = track.querySelectorAll('.testimonial-card');
-  let current = 0;
-
-  // Build dots
-  cards.forEach((_, i) => {
-    const dot = document.createElement('div');
-    dot.className = 'dot' + (i === 0 ? ' active' : '');
-    dot.addEventListener('click', () => goTo(i));
-    dotsContainer.appendChild(dot);
-  });
-
-  function goTo(index) {
-    current = (index + cards.length) % cards.length;
-    track.style.transform = `translateX(-${current * 100}%)`;
-    dotsContainer.querySelectorAll('.dot').forEach((d, i) =>
-      d.classList.toggle('active', i === current)
-    );
-  }
-
-  if (prevBtn) prevBtn.addEventListener('click', () => goTo(current - 1));
-  if (nextBtn) nextBtn.addEventListener('click', () => goTo(current + 1));
-
-  // Auto-slide every 5s
-  setInterval(() => goTo(current + 1), 5000);
-})();
-
-// ===================== CONTACT FORM =====================
-const contactForm = document.getElementById('contactForm');
-if (contactForm) {
-  contactForm.addEventListener('submit', e => {
-    e.preventDefault();
-    const btn     = contactForm.querySelector('.submit-btn');
-    const success = document.getElementById('formSuccess');
-    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
-    btn.disabled  = true;
-    setTimeout(() => {
-      btn.innerHTML = '<span data-en="Send Message" data-gu="સંદેશ મોકલો">Send Message</span><i class="fas fa-paper-plane"></i>';
-      btn.disabled  = false;
-      if (success) { success.style.display = 'flex'; setTimeout(() => success.style.display = 'none', 4000); }
-      contactForm.reset();
-    }, 1500);
-  });
-}
-const filterBtns = document.querySelectorAll('.filter-btn');
-filterBtns.forEach(btn => {
-  btn.addEventListener('click', () => {
-    filterBtns.forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    const filter = btn.dataset.filter;
-    document.querySelectorAll('.portfolio-item').forEach(item => {
-      item.style.display = (filter === 'all' || item.dataset.category === filter) ? '' : 'none';
-    });
-  });
-});
 
 // ===================== LIGHTBOX =====================
 function initLightbox(items) {
@@ -461,10 +408,10 @@ if (hireBtn) {
       selectedRating = 5;
       stars.forEach(s => s.classList.add('active'));
       if (success) { success.style.display = 'flex'; setTimeout(() => success.style.display = 'none', 4000); }
-      loadReviews(); // refresh the list immediately
+      loadReviews();
     } catch (err) { /* silently fail */ }
 
-    btn.innerHTML = '<span>Submit Review</span><i class="fas fa-paper-plane"></i>';
+    btn.innerHTML = '<span data-en="Submit Review" data-gu="સમીક્ષા સબમિટ કરો">Submit Review</span><i class="fas fa-paper-plane"></i>';
     btn.disabled  = false;
   });
 })();
