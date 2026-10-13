@@ -1,0 +1,22 @@
+{
+  "photos": [
+    { "filename": "image1.jpeg",  "title": "Woodwork", "category": "furniture",   "src": "/images/image1.jpeg" },
+    { "filename": "image2.jpeg",  "title": "Woodwork", "category": "furniture",   "src": "/images/image2.jpeg" },
+    { "filename": "image3.jpeg",  "title": "Woodwork", "category": "interior",    "src": "/images/image3.jpeg" },
+    { "filename": "image4.jpeg",  "title": "Woodwork", "category": "furniture",   "src": "/images/image4.jpeg" },
+    { "filename": "image5.jpeg",  "title": "Woodwork", "category": "interior",    "src": "/images/image5.jpeg" },
+    { "filename": "image6.jpeg",  "title": "Woodwork", "category": "carving",     "src": "/images/image6.jpeg" },
+    { "filename": "image7.jpeg",  "title": "Woodwork", "category": "furniture",   "src": "/images/image7.jpeg" },
+    { "filename": "image8.jpeg",  "title": "Woodwork", "category": "interior",    "src": "/images/image8.jpeg" },
+    { "filename": "image9.jpeg",  "title": "Woodwork", "category": "carving",     "src": "/images/image9.jpeg" },
+    { "filename": "image10.jpeg", "title": "Woodwork", "category": "restoration", "src": "/images/image10.jpeg" },
+    { "filename": "image11.jpeg", "title": "Woodwork", "category": "furniture",   "src": "/images/image11.jpeg" },
+    { "filename": "WhatsApp Image 2026-09-13 at 11.42.34 PM.jpeg", "title": "Woodwork", "category": "interior",  "src": "/images/WhatsApp%20Image%202026-09-13%20at%2011.42.34%20PM.jpeg" },
+    { "filename": "WhatsApp Image 2026-09-13 at 11.42.36 PM.jpeg", "title": "Woodwork", "category": "furniture", "src": "/images/WhatsApp%20Image%202026-09-13%20at%2011.42.36%20PM.jpeg" },
+    { "filename": "WhatsApp Image 2026-09-13 at 11.42.38 PM.jpeg", "title": "Woodwork", "category": "interior",  "src": "/images/WhatsApp%20Image%202026-09-13%20at%2011.42.38%20PM.jpeg" },
+    { "filename": "WhatsApp Image 2026-09-13 at 11.42.42 PM.jpeg", "title": "Woodwork", "category": "carving",   "src": "/images/WhatsApp%20Image%202026-09-13%20at%2011.42.42%20PM.jpeg" },
+    { "filename": "WhatsApp Image 2026-09-13 at 11.43.13 PM.jpeg", "title": "Woodwork", "category": "furniture", "src": "/images/WhatsApp%20Image%202026-09-13%20at%2011.43.13%20PM.jpeg" },
+    { "filename": "WhatsApp Image 2026-09-13 at 11.43.14 PM.jpeg", "title": "Woodwork", "category": "interior",  "src": "/images/WhatsApp%20Image%202026-09-13%20at%2011.43.14%20PM.jpeg" },
+    { "filename": "WhatsApp Image 2026-09-13 at 11.43.29 PM.jpeg", "title": "Woodwork", "category": "carving",   "src": "/images/WhatsApp%20Image%202026-09-13%20at%2011.43.29%20PM.jpeg" }
+  ]
+}
